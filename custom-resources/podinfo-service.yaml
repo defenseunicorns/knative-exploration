@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: podinfo
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: podinfo
+  namespace: podinfo
+spec:
+  template:
+    metadata:
+      annotations:
+        client.knative.dev/user-image: stefanprodan/podinfo
+      creationTimestamp: null
+    spec:
+      containers:
+      - env:
+        - name: TARGET
+          value: World
+        image: stefanprodan/podinfo
+        name: ""
+        ports:
+        - containerPort: 9898
+        resources: {}
+status: {}
