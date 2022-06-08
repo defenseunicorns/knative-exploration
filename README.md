@@ -53,7 +53,9 @@ Getting started...
       * `kubectl apply ./custom-resources/serving.yaml
    1. Verify the Knative Serving deployment:
       * `kubectl get deployments -n knative-serving`
-3. Deploy podinfo (quickstart instructions... but with podinfo)
+3. Deploy podinfo knative service (quickstart instructions... but with podinfo):
+   * `kubectl apply -f custom-resources/podinfo-service.yaml`
+   * `kubectl get all -n podinfo`
 4. ...
 5. Profit!
 

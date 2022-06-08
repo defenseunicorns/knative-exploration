@@ -39,6 +39,7 @@ gatekeeper:
             - registry1.dso.mil
             - registry.dso.mil
             - gcr.io
+            - index.docker.io
       httpsOnly:
         match:
           excludedNamespaces:
