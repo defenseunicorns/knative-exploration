@@ -1,0 +1,54 @@
+domain: bigbang.dev
+
+jaeger:
+  enabled: false
+
+flux:
+  interval: 1m
+  rollback:
+    cleanupOnFail: false
+
+logging:
+  enabled: false
+
+fluentbit:
+  enabled: false
+
+istio:
+  enabled: true
+
+clusterAuditor:
+  enabled: true
+
+monitoring:
+  enabled: false
+
+kiali:
+  enabled: false
+
+eckoperator:
+  enabled: false
+
+gatekeeper:
+  enabled: true
+  values:
+    violations:
+      allowedDockerRegistries:
+        parameters:
+          repos:
+            - registry1.dso.mil
+            - registry.dso.mil
+            - gcr.io
+      httpsOnly:
+        match:
+          excludedNamespaces:
+          - default
+    replicas: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits: {}
+
+twistlock:
+  enabled: false
