@@ -20,7 +20,7 @@ Setting up the local development environment requires the following to be instal
 * [knative CLI](https://knative.dev/docs/getting-started/quickstart-install/)
 * [Local clone of the BB repository](https://repo1.dso.mil/platform-one/big-bang/bigbang)
 
-## Local Development Setup
+## Local Development Setup (k3d)
 Getting started...
 1. Deploy K3d
    * `k3d cluster install -c k3d-config.yaml`
@@ -53,12 +53,12 @@ Getting started...
       * `kubectl apply ./custom-resources/serving.yaml
    1. Verify the Knative Serving deployment:
       * `kubectl get deployments -n knative-serving`
-
-
-
 3. Deploy podinfo (quickstart instructions... but with podinfo)
 4. ...
 5. Profit!
+
+## Local Development setup (Zarf):
+???
 
 ## Additional Notes
 * Upgrade the bigbang deployment values by adjusting any of the passed value files and re-running the helm upgrade command in 3.2.1 above
