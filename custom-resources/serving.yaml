@@ -18,4 +18,6 @@ spec:
   config:
     istio:
       gateway.istio-system.public: "public-ingressgateway.istio-system.svc.cluster.local"
-      gateway.knative-serving.knative-ingress-gateway: public-ingressgateway.istio-system.svc.cluster.local
+    domain:
+      bigbang.dev: |
+        bigbang.dev: |
