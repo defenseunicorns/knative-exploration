@@ -37,8 +37,8 @@ Getting started...
    ```
     registryCredentials:
     - registry: registry1.dso.mil
-    username: <user>
-    password: <pass>
+      username: <user>
+      password: <pass>
    ```
    1. Create the `bigbang` namespace:
       *  `kubectl create ns bigbang`
