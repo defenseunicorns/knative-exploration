@@ -50,7 +50,7 @@ Getting started...
    1. [knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/):
       * `kubectl apply -f https://github.com/knative/operator/releases/download/knative-v1.5.0/operator.yaml`
    1. Server CR (configured to use istio):
-      * `kubectl apply ./custom-resources/serving.yaml
+      * `kubectl apply -f ./custom-resources/serving.yaml`
    1. Verify the Knative Serving deployment:
       * `kubectl get deployments -n knative-serving`
 3. Deploy podinfo knative service (quickstart instructions... but with podinfo):
