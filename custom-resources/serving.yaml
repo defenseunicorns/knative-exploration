@@ -12,9 +12,6 @@ spec:
   ingress:
     istio:
       enabled: true
-      # knative-local-gateway:
-        # selector:
-          # app: public-ingressgateway
       knative-ingress-gateway:
         selector:
           app: public-ingressgateway

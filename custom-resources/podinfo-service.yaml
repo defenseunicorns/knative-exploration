@@ -3,6 +3,24 @@ kind: Namespace
 metadata:
   name: podinfo
 ---
+apiVersion: networking.internal.knative.dev/v1alpha1
+kind: ClusterDomainClaim
+metadata:
+  name: podinfo.bigbang.dev
+spec:
+  namespace: podinfo
+---
+apiVersion: serving.knative.dev/v1alpha1
+kind: DomainMapping
+metadata:
+  name: podinfo.bigbang.dev
+  namespace: podinfo
+spec:
+  ref:
+    name: podinfo
+    kind: Service
+    apiVersion: serving.knative.dev/v1
+---
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
