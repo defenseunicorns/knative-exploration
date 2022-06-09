@@ -19,6 +19,7 @@ Setting up the local development environment requires the following to be instal
 * [helm CLI](https://helm.sh/docs/intro/install/)
 * [knative CLI](https://knative.dev/docs/getting-started/quickstart-install/)
 * [Local clone of the BB repository](https://repo1.dso.mil/platform-one/big-bang/bigbang)
+* Kubernetes version 1.22.0+
 
 ## Local Development Setup (k3d)
 Getting started...
