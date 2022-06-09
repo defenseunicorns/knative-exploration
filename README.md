@@ -23,7 +23,7 @@ Setting up the local development environment requires the following to be instal
 ## Local Development Setup (k3d)
 Getting started...
 1. Deploy K3d
-   * `k3d cluster install -c k3d-config.yaml`
+   * `k3d cluster create -c k3d-config.yaml`
 1. Check that kubectl is connected to localhost
    * `kubectl cluster-info`
 1. Deploy Bigbang
