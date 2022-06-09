@@ -28,6 +28,7 @@ Getting started...
    * `kubectl cluster-info`
 1. Deploy Bigbang
    1. Export the bigbang cloned repo location as `$BIGBANG_REPO`
+      * ex: `export BIGBANG_REPO=/home/ablanchard/Source/platform-one/BigBang/bigbang`
    2. Install flux:
       * `$BIGBANG_REPO/scripts/install_flux.sh -u <user> -p <pass>`
       > user: platform1 username
