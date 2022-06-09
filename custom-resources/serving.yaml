@@ -9,6 +9,18 @@ metadata:
   name: knative-serving
   namespace: knative-serving
 spec:
+  ingress:
+    istio:
+      enabled: true
+      # knative-local-gateway:
+        # selector:
+          # app: public-ingressgateway
+      knative-ingress-gateway:
+        selector:
+          app: public-ingressgateway
   config:
     istio:
-      local-gateway.knative-serving.knative-local-gateway: "knative-local-gateway.istio-system.svc.cluster.local"
+      gateway.istio-system.public: public-ingressgateway.istio-system.svc.cluster.local
+    domain:
+      bigbang.dev: |
+        bigbang.dev: |
