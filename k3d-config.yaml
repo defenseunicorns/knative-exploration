@@ -10,9 +10,6 @@ options:
       - arg: --disable=traefik
         nodeFilters:
           - server:*
-      - arg: --disable=servicelb
-        nodeFilters:
-          - server:*
       - arg: --cluster-cidr=172.20.1.0/24
         nodeFilters:
           - server:*
@@ -34,5 +31,8 @@ ports:
     nodeFilters:
       - loadbalancer
   - port: 443:443
+    nodeFilters:
+      - loadbalancer
+  - port: 15021:15021
     nodeFilters:
       - loadbalancer
