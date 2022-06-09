@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: DomainMapping
+metadata:
+  name: podinfo.bigbang.dev
+  namespace: podinfo
+spec:
+  ref:
+    name: podinfo
+    kind: Service
+    apiVersion: serving.knative.dev/v1
