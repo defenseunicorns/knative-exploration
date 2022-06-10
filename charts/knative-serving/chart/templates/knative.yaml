@@ -1,0 +1,47 @@
+apiVersion: operator.knative.dev/v1alpha1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  labels:
+    {{- include "knative-serving.labels" . | nindent 4 }}
+spec:
+  version: {{ .Chart.AppVersion }}
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          app: public-ingressgateway
+  config:
+    istio:
+      gateway.istio-system.public: public-ingressgateway.istio-system.svc.cluster.local
+    domain:
+      {{- if .Values.knative.domain }}
+      "{{ .Values.knative.domain }}": ""
+      {{- else }}
+      # for backwards compatibility
+      {{- toYaml .Values.domain | nindent 6 }}
+      {{- end }}
+    {{- if .Values.tls.enabled }}
+    network:
+      {{- if .Values.tls.autoTLS.enabled }}
+      auto-tls: Enabled
+      namespace-wildcard-cert-selector: '{"matchExpressions": [{"key":"networking.knative.dev/disableWildcardCert", "operator": "NotIn", "values":["true"]}]}'
+      {{- else }}
+      auto-tls: Disabled
+      domain-template: '{{`{{`}}.Name{{`}}`}}-{{`{{`}}.Namespace{{`}}`}}.{{`{{`}}.Domain{{`}}`}}'
+      default-external-scheme: 'https'
+      http-protocol: Enabled
+      {{- end }}
+    {{- end }}
+    deployment:
+      registriesSkippingTagResolving: kind.local,ko.local,dev.local,knative.registry.svc.cluster.local
+  additionalManifests:
+  {{- if and .Values.tls.enabled (not .Values.tls.autoTLS.enabled) }}
+    # HACK to configure the knative-ingress-gateway Gateway for TLS support.
+    # We use this method until there's a better way to override the config of the
+    # knative-ingress-gateway gateway using the operator.
+    # ref: https://github.com/knative/operator/issues/505
+    #      https://github.com/knative/serving/issues/11335
+  - URL: https://tm-config-additional-manifests.s3.us-west-1.amazonaws.com/knative-ingress-gateway.yaml
+  {{- end }}
