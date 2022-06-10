@@ -6,7 +6,15 @@ metadata:
     {{- include "knative-serving.labels" . | nindent 4 }}
 spec:
   version: {{ .Chart.AppVersion }}
+  ingress:
+    istio:
+      enabled: true
+      knative-ingress-gateway:
+        selector:
+          app: public-ingressgateway
   config:
+    istio:
+      gateway.istio-system.public: public-ingressgateway.istio-system.svc.cluster.local
     domain:
       {{- if .Values.knative.domain }}
       "{{ .Values.knative.domain }}": ""
