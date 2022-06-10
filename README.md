@@ -30,32 +30,30 @@ Getting started...
 1. Deploy Bigbang
    1. Export the bigbang cloned repo location as `$BIGBANG_REPO`
       * ex: `export BIGBANG_REPO=/home/ablanchard/Source/platform-one/BigBang/bigbang`
-   2. Install flux:
+   2. Checkout `knative` branch of BigBang
+      ```
+      cd $BIGBANG_REPO
+      git checkout knative
+      ``` 
+   3. Install flux:
       * `$BIGBANG_REPO/scripts/install_flux.sh -u <user> -p <pass>`
       > user: platform1 username
 
       > pass: [harbor](https://registry1.dso.mil/harbor/projects) token
-   3. Create a `~/.bigbang/local-credentials.yaml` file (using the same username and token) for passing to the bigbang chart:
+   4. Create a `~/.bigbang/local-credentials.yaml` file (using the same username and token) for passing to the bigbang chart:
    ```
     registryCredentials:
     - registry: registry1.dso.mil
       username: <user>
       password: <pass>
    ```
-   1. Create the `bigbang` namespace:
+   5. Create the `bigbang` namespace:
       *  `kubectl create ns bigbang`
-   2. Deploy the helm chart, using the credentials file and the minimal values file (adjust as needed):
+   6. Deploy the helm chart, using the credentials file and the minimal values file (adjust as needed):
       *  `helm upgrade -i bigbang $BIGBANG_REPO/chart -n bigbang -f ~/.bigbang/local-credentials.yaml -f $BIGBANG_REPO/chart/ingress-certs.yaml -f ./minimal-bb.yaml`
-   3. Wait for the deployments...
+   7. Wait for the deployments...
       * `watch kubectl get hr -A`
-2. Install knative:
-   1. [knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/):
-      * `kubectl apply -f https://github.com/knative/operator/releases/download/knative-v1.5.0/operator.yaml`
-   1. Server CR (configured to use istio):
-      * `kubectl apply -f ./custom-resources/serving.yaml`
-   1. Verify the Knative Serving deployment:
-      * `kubectl get deployments -n knative-serving`
-3. Deploy podinfo knative service:
+2. Deploy podinfo knative service:
    * `kustomize build apps/podinfo | k apply -f -`
    * `kubectl get all -n podinfo`
 4. ...
