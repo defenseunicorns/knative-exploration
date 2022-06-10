@@ -29,7 +29,7 @@ spec:
   path: "./service-base/"
   postBuild:
     substitute:
-      domain: "podinfo.bigbang.dev"
+      domain: "podinfo.bigbang.dev2"
       namespace: "podinfo"
       app_name: "podinfo"
       image: "stefanprodan/podinfo"
