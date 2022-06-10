@@ -1,0 +1,5 @@
+---
+resources:
+  - cluster-domain-claim.yaml
+  - domain-mapping.yaml
+  - knative-service.yaml

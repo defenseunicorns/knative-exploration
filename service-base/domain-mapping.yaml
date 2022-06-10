@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: DomainMapping
+metadata:
+  name: ${domain:=bigbang.dev}
+  namespace: ${namespace:=bigbang}
+spec:
+  ref:
+    name: ${app-name:=app-name}
+    kind: Service
+    apiVersion: serving.knative.dev/v1
