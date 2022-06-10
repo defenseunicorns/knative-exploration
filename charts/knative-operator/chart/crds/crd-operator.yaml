@@ -1298,7 +1298,7 @@ spec:
       clientConfig:
         service:
           name: operator-webhook
-          namespace: knative-system
+          namespace: knative-operator
           path: /resource-conversion
 
 ---
@@ -2630,5 +2630,5 @@ spec:
       clientConfig:
         service:
           name: operator-webhook
-          namespace: knative-system
+          namespace: knative-operator
           path: /resource-conversion
