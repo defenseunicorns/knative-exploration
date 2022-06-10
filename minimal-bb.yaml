@@ -40,10 +40,17 @@ gatekeeper:
             - registry.dso.mil
             - gcr.io
             - index.docker.io
+            - rancher/klipper-lb:v0.3.4
       httpsOnly:
         match:
           excludedNamespaces:
           - default
+      hostNetworking:
+        parameters:
+          excludedResources:
+          # Allows k3d load balancer containers to mount host ports
+          - istio-system/lb-port-.*
+
     replicas: 1
     resources:
       requests:
