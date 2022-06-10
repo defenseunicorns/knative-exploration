@@ -31,6 +31,6 @@ spec:
     substitute:
       domain: "podinfo.bigbang.dev"
       namespace: "podinfo"
-      app-name: "podinfo"
+      app_name: "podinfo"
       image: "stefanprodan/podinfo"
       port: "9898"
