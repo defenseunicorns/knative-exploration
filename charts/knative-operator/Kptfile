@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: knative-operator
+upstream:
+  type: git
+  git:
+    commit: 4c4c088c49dbdc0be95171a4aec19b67a34fe930
+    repo: https://github.com/triggermesh/charts
+    directory: charts/knative-operator
+    ref: main
