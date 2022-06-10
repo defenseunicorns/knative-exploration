@@ -2,7 +2,5 @@ apiVersion: networking.internal.knative.dev/v1alpha1
 kind: ClusterDomainClaim
 metadata:
   name: ${domain:=bigbang.dev}
-  annotations:
-    some: change
 spec:
   namespace: ${namespace:=bigbang}
