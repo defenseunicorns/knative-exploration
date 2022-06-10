@@ -1,0 +1,19 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: ${app_name:=app-name}
+  namespace: ${namespace:=bigbang}
+spec:
+  template:
+    spec:
+      containers:
+      - env:
+        - name: TARGET
+          value: World
+        image: ${image:=registry1.dso.mil/ironbank/redhat/ubi/ubi8-minimal}
+        name: ""
+        ports:
+        - containerPort: ${port:=8080}
+        resources: {}
+status: {}

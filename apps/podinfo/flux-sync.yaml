@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: podinfo
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: knative-exploration
+  namespace: podinfo
+spec:
+  interval: 1m0s
+  ref:
+    branch: feature/kustomize-service-base
+  url: https://github.com/defenseunicorns/knative-exploration
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: knative-podinfo
+  namespace: podinfo
+spec:
+  interval: 1m
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: knative-exploration
+    namespace: podinfo
+  path: "./service-base/"
+  postBuild:
+    substitute:
+      domain: "podinfo.bigbang.dev"
+      namespace: "podinfo"
+      app_name: "podinfo"
+      image: "stefanprodan/podinfo"
+      port: "9898"
