@@ -60,3 +60,10 @@ gatekeeper:
 
 twistlock:
   enabled: false
+
+addons:
+  knativeoperator:
+    enabled: true
+
+  knativeserving:
+    enabled: true

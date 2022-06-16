@@ -30,40 +30,52 @@ Getting started...
 1. Deploy Bigbang
    1. Export the bigbang cloned repo location as `$BIGBANG_REPO`
       * ex: `export BIGBANG_REPO=/home/ablanchard/Source/platform-one/BigBang/bigbang`
-   2. Install flux:
+   3. Install flux:
       * `$BIGBANG_REPO/scripts/install_flux.sh -u <user> -p <pass>`
       > user: platform1 username
 
       > pass: [harbor](https://registry1.dso.mil/harbor/projects) token
-   3. Create a `~/.bigbang/local-credentials.yaml` file (using the same username and token) for passing to the bigbang chart:
+   4. Create a `~/.bigbang/local-credentials.yaml` file (using the same username and token) for passing to the bigbang chart:
    ```
     registryCredentials:
     - registry: registry1.dso.mil
       username: <user>
       password: <pass>
    ```
-   1. Create the `bigbang` namespace:
+   5. Create the `bigbang` namespace:
       *  `kubectl create ns bigbang`
-   2. Deploy the helm chart, using the credentials file and the minimal values file (adjust as needed):
+   6. Deploy the helm chart, using the credentials file and the minimal values file (adjust as needed):
       *  `helm upgrade -i bigbang $BIGBANG_REPO/chart -n bigbang -f ~/.bigbang/local-credentials.yaml -f $BIGBANG_REPO/chart/ingress-certs.yaml -f ./minimal-bb.yaml`
-   3. Wait for the deployments...
+   7. Wait for the deployments...
       * `watch kubectl get hr -A`
-2. Install knative:
-   1. [knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/):
-      * `kubectl apply -f https://github.com/knative/operator/releases/download/knative-v1.5.0/operator.yaml`
-   1. Server CR (configured to use istio):
-      * `kubectl apply -f ./custom-resources/serving.yaml`
-   1. Verify the Knative Serving deployment:
-      * `kubectl get deployments -n knative-serving`
-3. Deploy podinfo knative service:
+1. Install Knative
+    * ### Option 1: Using Bigbang (preferred)
+        Use the helm chart based deployment, managed by Bigbang values to deploy the knative operator and serving component.
+        1. Checkout `knative` branch of BigBang
+            ```
+            cd $BIGBANG_REPO
+            git checkout knative
+            ```
+        2. Re-run the `helm upgrade` command listed above
+        3. Wait for the deployments...
+            * `watch kubectl get hr -A`
+
+    * ### Option 2: Directly with kubectl (deprecated)
+        This method installs knative CRDs and operator directly from the upstream source, and configures the serving component using `./custom-resources/serving.yaml`.
+        1. Install the [knative Operator](https://knative.dev/docs/install/operator/knative-with-operators/):
+            * `kubectl apply -f https://github.com/knative/operator/releases/download/knative-v1.5.0/operator.yaml`
+        2. Server CR (configured to use istio):
+            * `kubectl apply -f ./custom-resources/serving.yaml`
+        3. Verify the Knative Serving deployment:
+            * `kubectl get deployments -n knative-serving`
+2. Deploy podinfo knative service:
    * `kustomize build apps/podinfo | k apply -f -`
    * `kubectl get all -n podinfo`
-4. ...
-5. Profit!
+3. ...
+4. Profit!
 
 ## Local Development setup (Zarf):
 ???
 
 ## Additional Notes
 * Upgrade the bigbang deployment values by adjusting any of the passed value files and re-running the helm upgrade command in 3.2.1 above
-* Document all the things!
